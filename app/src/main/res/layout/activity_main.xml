@@ -9,16 +9,15 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_date"
-        android:layout_width="wrap_content"
+        android:id="@+id/date_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Date"
-        android:layout_marginBottom="10dp" />
+        android:text="Button" />
 
     <TextView
-        android:id="@+id/textview_get_date"
-        android:layout_width="wrap_content"
+        android:id="@+id/date_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get Date" />
+        android:text="TextView" />
 
 </LinearLayout>

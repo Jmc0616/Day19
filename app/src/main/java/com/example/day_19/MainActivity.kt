@@ -3,24 +3,28 @@ package com.example.day_19
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    var cal = Calendar.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_date.setOnClickListener{
-            showDatePicker()
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        date_button.setOnClickListener {
+            val date_option = DatePickerDialog(this,
+                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+
+                    date_text.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                }, year, month, day)
+
+            date_option.show()
         }
     }
-    fun showDatePicker(){
-        DatePickerDialog(this, DatePickerDialog.OnDateSetListener{datePicker, year, month, day ->
-            println(year)
-            println(month + 1)
-            println(day)
-        }, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DATE)).show();
-    }
+
 }
