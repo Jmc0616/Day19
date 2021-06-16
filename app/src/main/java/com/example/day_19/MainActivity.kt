@@ -12,45 +12,63 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    var cal = Calendar.getInstance()
+    val year = cal.get(Calendar.YEAR)
+    val month = cal.get(Calendar.MONTH)
+    val day = cal.get(Calendar.DAY_OF_MONTH)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // 현재 날짜
-        val now = LocalDate.now()
-        val formatDate = DateTimeFormatter.ISO_DATE
-        val nowDate = now.format(formatDate)
+        var now = LocalDate.now()
+        var formatDate = DateTimeFormatter.ISO_DATE
+        var nowDate = now.format(formatDate)
         now_date_detail.setText(""+ now)
 
-        // 격리 시작일
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
-        date_button.setOnClickListener {
-            var end_day = DatePickerDialog(this,
-                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-
-                    end_date_detail.setText("" + mYear + "년 " + mMonth + "월 " + mDay + "일 ")
-                }, year, month, day)
-
-            end_day.show()
-
-            var start_day = DatePickerDialog(this,
-                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-
-                    start_date_detail.setText("" + mYear + "년 " + mMonth + "월 " + mDay + "일 ")
-                }, year, month, day)
-
-            start_day.show()
+        date_button.setOnClickListener{
+            endDatePicker()
+            startDatePicker()
         }
-        // var time_count = nowDate - end_date
-        // var EndDate = LocalDate.of(start_day)
+    }
 
-        // var D_day = Period.between(now, EndDate)
+    fun startDatePicker(){
+        DatePickerDialog(this, DatePickerDialog.OnDateSetListener{datePicker, year, month, day ->
+            start_date_detail.setText(""+year+month+day)
 
-        // start_date.setText(""+D_day.getDays())
+            var Dday = Calendar.getInstance()
+            Dday.set(year, month, day)
+            var today = Calendar.getInstance()
+
+            var DDay = Dday.timeInMillis / 86400000
+            var ToDay = today.timeInMillis / 86400000
+
+            var D_day = ToDay-DDay
+
+            start_date.setText(""+D_day)
+
+        }, year, month, day).show()
 
     }
+    fun endDatePicker(){
+        DatePickerDialog(this, DatePickerDialog.OnDateSetListener{datePicker, year, month, day ->
+            end_date_detail.setText(""+year+month+day)
+
+            var Dday = Calendar.getInstance()
+            Dday.set(year, month, day)
+            var today = Calendar.getInstance()
+
+            var DDay = Dday.timeInMillis / 86400000
+            var ToDay = today.timeInMillis / 86400000
+
+            var D_day = DDay-ToDay
+            end_date.setText(""+D_day)
+
+        }, year, month, day).show()
+    }
+    fun Good_Writing(){
+        
+    }
+
 }
