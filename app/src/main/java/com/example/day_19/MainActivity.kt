@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         var nowDate = now.format(formatDate)
         now_date_detail.setText(""+ now)
 
+        // 좋은말
+        Good_Writing()
+
+        // 격리 시작 버튼
         date_button.setOnClickListener{
             endDatePicker()
             startDatePicker()
@@ -68,7 +72,12 @@ class MainActivity : AppCompatActivity() {
         }, year, month, day).show()
     }
     fun Good_Writing(){
-        
+        val write = listOf("네가 힘들고 우울하고 지칠때는 너를 아끼는 사람을 생각하자 ", "무적인 사람은 어디에도 없다 다 속으로 이겨내고 사는것뿐이다 ",
+            "물살에 휩쓸리지 않고 벼텨낸다면 그 또한 지나간다 ", "의지만 있으면 얼마든지 극복할 수 있다 ")
+
+        var random = Random().nextInt(write.size)
+        var random_write = write[random]
+        Good_Writing.setText(""+random_write)
     }
 
 }
