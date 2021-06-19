@@ -1,13 +1,13 @@
 package com.example.day_19
 
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Period
+
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         date_button.setOnClickListener{
             endDatePicker()
             startDatePicker()
+        }
+
+        precautions.setOnClickListener {
+            precautions()
+        }
+        symptom_report.setOnClickListener {
+            symptom_report()
         }
     }
 
@@ -78,6 +85,14 @@ class MainActivity : AppCompatActivity() {
         var random = Random().nextInt(write.size)
         var random_write = write[random]
         Good_Writing.setText(""+random_write)
+    }
+    fun precautions(){
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://ncov.mohw.go.kr/duBoardList.do?brdId=2&brdGubun=22"))
+        startActivity(intent)
+    }
+    fun symptom_report(){
+        var intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://ncov.mohw.go.kr/baroView3.do?brdId=4&brdGubun=43"))
+        startActivity(intent)
     }
 
 }
